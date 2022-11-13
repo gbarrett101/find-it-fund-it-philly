@@ -10,6 +10,15 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- deck.gl standalone bundle -->
+        <script src="https://unpkg.com/deck.gl@^8.8.0/dist.min.js"></script>
+    
+        <!-- Mapbox dependencies -->
+        <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.js"></script>
+        <link
+            href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.css"
+            rel="stylesheet"
+        />
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -178,7 +187,13 @@
                                     Find it - Map Tool
                                 </h4>
                             </div>
-                            <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                            <div id="map">
+                                <!-- panel and hover tooltip that update by map interaction -->
+                                <tooltip id="panel">
+                                    <div class="exit" onclick="hidePanel()">X</div>
+                                    <div></div>
+                                </tooltip>
+                            </div>
                         </div>
                         <!--
                             <div class="col-xl-6">
@@ -265,5 +280,14 @@
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
+        <!-- Map javascript -->
+        <script src="js/map.js"></script>
+        <!-- Additional scripting for map-->
+        <script>
+            // function to exit the panel on click
+            function hidePanel() {
+            document.getElementById("panel").style.opacity = 0;
+            }
+        </script>
     </body>
 </html>

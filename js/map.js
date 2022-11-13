@@ -71,7 +71,7 @@ const deckgl = new deck.DeckGL({
                         info.object.properties.TRACTCE10
                     }</strong>
                     <br></br>
-                    Index SCORE: ${info.object.properties.INDEX_.toFixed(2 || "N/A")} 
+                    Index Score: ${info.object.properties.INDEX_.toFixed(2 || "N/A")} 
                     <br></br>
                     Tree Canopy Score: ${info.object.properties.I_CANOPY.toFixed(2 || "N/A")}
                     <br></br>
