@@ -11700,3 +11700,31 @@ body {
   font-size: 0.75rem;
   border-radius: 0.25rem !important;
 }
+
+
+/* Map Styling */
+
+#map {
+  width: 100vw;
+  height: 100vh;
+}
+
+#panel {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 10px;
+  background: black;
+  color: white;
+  z-index: 1;
+  font-family: Helvetica, sans-serif;
+  transition: 0.5s ease-in-out;
+  opacity: 0;
+}
+
+.exit {
+  cursor: pointer;
+  margin-bottom: 1rem;
+  padding: 0.35rem;
+  float: right;
+}
