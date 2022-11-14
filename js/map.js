@@ -105,18 +105,17 @@ const deckgl = new deck.DeckGL({
             stroke: false,
             // Function for fill color
             getFillColor: (d) => {
-              const abs = Math.abs(d.properties.INDEX_);
               // Colors range from full white [255,255,255] to dark green [51,160,44]
-              const red = map_range(abs, 2, 7, 255, 51);
-              const green = map_range(abs, 2, 7, 255, 160);
-              const blue = map_range(abs, 2, 7, 255, 44);
+              const red = map_range(d.properties.INDEX_, 2, 7, 255, 51);
+              const green = map_range(d.properties.INDEX_, 2, 7, 255, 160);
+              const blue = map_range(d.properties.INDEX_, 2, 7, 255, 44);
               // logic
                 // if Index_ isn't null
                   // return a green hue based on how large the index value is
                 // otherwise return all 0s with full transparency
               return d.properties.INDEX_
                       ? [red, green, blue, 200]
-                      : [0, 0, 0, 0];
+                      : [0, 0, 0, 100];
               },
             getStrokeColor: [0, 0, 0, 255],
             LineWidthUnits: "meters",
