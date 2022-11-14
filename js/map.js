@@ -15,9 +15,70 @@ function flyToClick(coords) {
       },
     });
   }
-   
+
+function createChart(ctx) {
+                
+  const context = ctx.getContext('2d');
+  context.clearRect(0, 0, ctx.width, ctx.height);
+  
+  data = {
+    labels: ["canopy", "disadvantaged","low income", "over 64", "parks", "vacancy" ],
+    datasets: [{
+        label: "Index Score", 
+        data: [],
+        backgroundColor: "#9e6171",
+        color:"#9a9a9a",
+      }]
+    } 
+
+
+  const config = {
+    type: 'horizontalBar',
+    data: data,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins:{
+        title:{
+          display: true, 
+          text: "Index Score"
+        }
+      },
+      scales: {
+        xAxes: [
+          {
+            display: true,
+            ticks: {
+              min: 0,
+              max: 1,
+            },
+          },
+        ],
+        yAxes: [
+          {
+            display: true,
+          },
+        ],
+      }
+    },
+  };
+  
+  return new Chart(panel, config);
+}
+
+function updateChart(chart, properties){
+  console.log(properties)
+  chart.data.datasets.forEach((dataset) => {
+    dataset.data = [properties.I_CANOPY, properties.I_DISADVAN,
+          properties.I_LOWINC, properties.I_OVER64, properties.I_PARKS,
+          properties.I_VACANT]
+    chart.update();
+});
+
+}
 const panel = document.getElementById("panel");
 const panelChild = document.querySelector("#panel :nth-child(2)");
+chart = createChart(panel)
 
 const deckgl = new deck.DeckGL({
     container: "map",
@@ -65,22 +126,8 @@ const deckgl = new deck.DeckGL({
             highlightColor: [255, 255, 255, 200],
             onClick: (info) => {
                 flyToClick(info.coordinate);
-            
-                panelChild.innerHTML = 
-                    `<strong>Census Tract #${
-                        info.object.properties.TRACTCE10
-                    }</strong>
-                    <br></br>
-                    Index Score: ${info.object.properties.INDEX_.toFixed(2 || "N/A")} 
-                    <br></br>
-                    Tree Canopy Score: ${info.object.properties.I_CANOPY.toFixed(2 || "N/A")}
-                    <br></br>
-                    Vacancy Score: ${info.object.properties.I_VACANT.toFixed(2 || "N/A")}
-                    <br></br>
-                    Coordinates:
-                    ${info.coordinate[0].toFixed(3)},
-                    ${info.coordinate[1].toFixed(3)}`;
                 panel.style.opacity = 1;
+                updateChart(chart, info.object.properties);
             },
     
         }),
