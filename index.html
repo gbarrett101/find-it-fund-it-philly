@@ -9,6 +9,11 @@
         <title>Register - SB Admin</title>
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <style>
+            div {text-align: center;}
+
+            .card {background-color: #fff;}
+        </style>
     </head>
     <body class="bs-primary">
         <div id="layoutAuthentication">
@@ -21,37 +26,49 @@
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Find it, Fund it, Philly</h3></div>
                                     <div class="card-body">
                                         <form>
-                                            <div class="col-mb-6">
-                                                <div class="card mb-1">
-                                                    <div class="card-body">
-                                                        <h5>FIND key areas in which your community may need support.</h5>
-                                                        <h5></h5>
-                                                        <h5>FUND your community organization’s projects through recommended resources.</h5> 
-                                                    </div>
-                                                </div>
-
-                                                <div class="card mb-1">
-                                                    <div class="card-body">
-                                                        <h7>To begin, please enter your address or select your neighboorhood and press continue:</h7>
-                                                    </div>
-                                                </div>
+                                            <div class="row mb-1">
+                                                <h5> <strong>FIND</strong> key areas in which your community may need support.</h5>
+                                                <h5></h5>
+                                                <h5> <strong>FUND</strong> your community organization’s projects through recommended resources.</h5> 
                                             </div>
+
+                                            <div class="row mb-1"></div>
+
+                                            <div class="card mb-1">
+                                                <element id = card-body-gray>
+                                                    <div class="card-body">
+                                                        <p>To begin, please enter your address or select your neighboorhood and press continue:</p>
+                                                    </div>
+
+                                                    <div class="row mb-6"> 
+                                                        <div class="col-md-1">
+                                                        </div>
+
+                                                        <div class="col-md-4">
+                                                            <label for="inputAddress">Neighborhood</label>
+                                                            <input class="form-control" id="inputAddress" type="email" placeholder="" />
+                                                        </div>
+        
+                                                        <div class="col-md-2">
+                                                            <h5>Or</h5>
+                                                        </div>
+        
+                                                        <div class="col-md-4">
+                                                            <label for="inputAddress">Address</label>
+                                                            <input class="form-control" id="inputAddress" type="address" placeholder="" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mb-1">
+                                                        <br></br>
+                                                    </div>
+
+                                                </element>
+                                            </div>
+
                                             
-                                            <div class="row mb-6"> 
-                                                <div class="col-md-4">
-                                                    <label for="inputAddress">Neighborhood</label>
-                                                    <input class="form-control" id="inputAddress" type="email" placeholder="" />
-                                                </div>
-
-                                                <div class="col-md-4">
-                                                    <h5>Or</h5>
-                                                </div>
-
-                                                <div class="col-md-4">
-                                                    <label for="inputAddress">Address</label>
-                                                    <input class="form-control" id="inputAddress" type="address" placeholder="" />
-                                                </div>
-                                            </div>
+                                            
+                                            
                                             
                                             <div class="mt-4 mb-0">
                                                 <div class="d-grid"><a class="btn btn-primary btn-block" href="home.html">Continue</a></div>
