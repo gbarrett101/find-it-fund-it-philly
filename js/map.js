@@ -16,25 +16,68 @@ function flyToClick(coords) {
     });
   }
 
-function createChart(ctx) {
-                
-  const context = ctx.getContext('2d');
-  context.clearRect(0, 0, ctx.width, ctx.height);
-  
-  data = {
+function updateChart(chart, data){
+    console.log(properties)
+    chart.data.datasets.forEach((dataset) => {
+      dataset.data = data
+      chart.update();
+    });
+  }
+
+overallIndexData = {
+    labels: ["Overall Index Score"],
+    datasets: [{
+        label: "Score", 
+        data: [],
+        backgroundColor: "#33A02C",
+        color:"#33A02C",
+      }]
+};
+
+overallIndexConfig = {
+  type: 'horizontalBar',
+  data: overallIndexData,
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins:{
+      title:{
+        display: true, 
+        text: "Overall Index Score"
+      }
+    },
+    scales: {
+      xAxes: [
+        {
+          display: true,
+          ticks: {
+            min: 0,
+            max: 10,
+          },
+        },
+      ],
+      yAxes: [
+        {
+          display: true,
+        },
+      ],
+    }
+  },
+};
+
+indexData = {
     labels: ["canopy", "disadvantaged","low income", "over 64", "parks", "vacancy" ],
     datasets: [{
         label: "Index Score", 
         data: [],
-        backgroundColor: "#9e6171",
-        color:"#9a9a9a",
+        backgroundColor: "#33A02C",
+        color:"#33A02C",
       }]
-    } 
+};
 
-
-  const config = {
+indexConfig = {
     type: 'horizontalBar',
-    data: data,
+    data: indexData,
     options: {
       responsive: true,
       maintainAspectRatio: false,
@@ -61,24 +104,13 @@ function createChart(ctx) {
         ],
       }
     },
-  };
-  
-  return new Chart(panel, config);
-}
+};
 
-function updateChart(chart, properties){
-  console.log(properties)
-  chart.data.datasets.forEach((dataset) => {
-    dataset.data = [properties.I_CANOPY, properties.I_DISADVAN,
-          properties.I_LOWINC, properties.I_OVER64, properties.I_PARKS,
-          properties.I_VACANT]
-    chart.update();
-});
+const overallIndexScore = document.getElementById("overallIndex");
+overallIndexChart = new Chart(overallIndexScore,overallIndexConfig)
 
-}
-const panel = document.getElementById("panel");
-const panelChild = document.querySelector("#panel :nth-child(2)");
-chart = createChart(panel)
+const indexScore = document.getElementById("index");
+indexChart = new Chart(indexScore,indexConfig)
 
 const deckgl = new deck.DeckGL({
     container: "map",
@@ -126,8 +158,16 @@ const deckgl = new deck.DeckGL({
             highlightColor: [255, 255, 255, 200],
             onClick: (info) => {
                 flyToClick(info.coordinate);
+                overallIndexScore.style.opacity = 1;
+                indexScore.style.opacity = 1;
                 panel.style.opacity = 1;
-                updateChart(chart, info.object.properties);
+                properties = info.object.properties
+                overallIndexData = [properties.INDEX_] 
+                indexData = [properties.I_CANOPY, properties.I_DISADVAN,
+                  properties.I_LOWINC, properties.I_OVER64, properties.I_PARKS,
+                  properties.I_VACANT]
+                updateChart(overallIndexChart,overallIndexData);
+                updateChart(indexChart, indexData);
             },
     
         }),

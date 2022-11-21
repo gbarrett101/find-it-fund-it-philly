@@ -11720,7 +11720,7 @@ body {
   top: 1rem;
   left: 1rem;
   padding: 10px;
-  background: #c7c7c7;
+  background: #FFFFFF;
   color: white;
   z-index: 1;
   font-family: Helvetica, sans-serif;
@@ -11728,8 +11728,45 @@ body {
   opacity: 0;
   height: 90%;
   max-height: 90%;
-  max-width: 30%;
+  width: 40%;
+  max-width: 40%;
 }
+
+#overallIndex{
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 10px;
+  background: #FFFFFF;
+  color: white;
+  z-index: 1;
+  font-family: Helvetica, sans-serif;
+  transition: 0.5s ease-in-out;
+  opacity: 0;
+  height: 100%;
+  max-height: 10%;
+  width:100%;
+  max-width: 100%;
+}
+
+#index{
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  padding: 10px;
+  background: #FFFFFF;
+  color: white;
+  z-index: 1;
+  font-family: Helvetica, sans-serif;
+  transition: 0.5s ease-in-out;
+  opacity: 0;
+  height: 85%;
+  max-height: 85%;
+  width:100%;
+  max-width: 100%;
+}
+
+
 
 .exit {
   cursor: pointer;
