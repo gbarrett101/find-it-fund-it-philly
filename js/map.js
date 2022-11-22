@@ -150,8 +150,9 @@ const deckgl = new deck.DeckGL({
                       : [0, 0, 0, 100];
               },
             getStrokeColor: [0, 0, 0, 255],
+            getLineColor: [0, 0, 0, 255],
             LineWidthUnits: "meters",
-            getLineWidth: 35,
+            getLineWidth: 10,
             // Interactive props
             pickable: true,
             autoHighlight: true,
