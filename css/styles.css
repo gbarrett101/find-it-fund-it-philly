@@ -11715,23 +11715,6 @@ body {
   height: 80vh;
 }
 
-#panel {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  padding: 10px;
-  background: #FFFFFF;
-  color: white;
-  z-index: 1;
-  font-family: Helvetica, sans-serif;
-  transition: 0.5s ease-in-out;
-  opacity: 0;
-  height: 90%;
-  max-height: 90%;
-  width: 40%;
-  max-width: 40%;
-}
-
 #overallIndex{
   top: 1rem;
   left: 1rem;
@@ -11760,6 +11743,11 @@ body {
 #charts{
   max-width:50%;
   max-height: 80vh;
+}
+
+#maptoolrow{
+  margin-left: 0;
+  margin-right: 0;
 }
 
 #maptool{
