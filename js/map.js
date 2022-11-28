@@ -1,68 +1,93 @@
-indexMetrics = {"Minority":"I_PCTMIN",
-"Low Income":"I_LOWINC",
-"Under Age 5":"I_UNDER5",
-"Over Age 64":"I_OVER64",
-"No High School Education":"I_NOHS",
-"Owner Occupied":"I_OWNER",
-"Traffic Amount":"I_TRAFFIC",
-"Ozone":"I_OZONE",
-"Particular matter":'I_PM25',
-"Park access":"I_PARKS",
-"Tree canopy":"I_CANOPY",
-"Playground Access":"I_PLAY",
-"Impervious Cover":"I_IMP",
-"Vacant Land":'I_VACANT'}
+// Index meta-data
+compositeMetaData = {"Index Composite Score": {"field": "INDEX_",
+                                   "description": "composite metric description"
+                                  }
+                       }
 
-indexLabels = Object.keys(indexMetrics)
-indexValues = Object.values(indexMetrics)
+indexMetaData = {
+" Minority":{"field":"I_PCTMIN",
+            "description": "Index score for percent minority"},
+"Low Income":{"field":"I_LOWINC",
+            "description":'Index score for percent low income'},
+"Under Age 5":{"field":"I_UNDER5",
+            "description":'Index score for percent under age 5'},
+"Over Age 64":{"field":"I_OVER64",
+            "description":'Index score for percent over age 64'},
+"No High School Education":{"field":"I_NOHS",
+            "description":'Index score for percent of adults without a high school education'},
+"Owner Occupied":{"field":"I_OWNER",
+            "description":'Index score for percent owner occupied'},
+"Traffic Amount":{"field":"I_TRAFFIC",
+            "description":'Index score for traffic amount'},
+"Ozone":{"field":"I_OZONE",
+            "description":'Index score for ozone'},
+"Particular matter":{"field":"I_PM25",
+            "description":'Index score for particular matter 2.5'},
+"Park Access":{"field":"I_PARKS",
+            "description":'Index score for park access'},
+"Tree Canopy":{"field":"I_CANOPY",
+            "description":'Index score for tree canopy'},
+"Playground Access":{"field":"I_PLAY",
+            "description":'Index score for playground access'},
+"Impervious Cover":{"field":"I_IMP",
+            "description":'Index score for impervious cover'},
+"Vacant Land":{"field":"I_VACANT",
+            "description":'Index score for vacant land'},
+}
+
+cityAverageMockIndexData = Object.values(indexMetaData).map(()=>0.5)
+cityAverageMockCompositeData = Object.values(compositeMetaData).map(()=>0.5)
+
+indexField = Object.values(indexMetaData).map((metric)=>metric['field'])
+indexLabels= Object.keys(indexMetaData)
+indexDescriptions = Object.values(indexMetaData).map((metric)=>metric['description'])
+
+compositeField = Object.values(compositeMetaData).map((metric)=>metric['field'])
+compositeLabel = Object.keys(compositeMetaData)
+compositeDescription = Object.values(compositeMetaData).map((metric)=>metric['description'])
 
 const index = "./data/index.geojson";
 function map_range(value, low1, high1, low2, high2) {
   return low2 + ((high2 - low2) * (value - low1)) / (high1 - low1);
 }
 
+// chart settings 
 
-function flyToClick(coords) {
-    deckgl.setProps({
-      initialViewState: {
-        longitude: coords[0],
-        latitude: coords[1],
-        zoom: 12,
-        transitionDuration: 500,
-        transitionInterpolator: new deck.FlyToInterpolator(),
-      },
-    });
-  }
-
-function updateChart(chart, data){
-    console.log(properties)
-    chart.data.datasets.forEach((dataset) => {
-      dataset.data = data
-      chart.update();
-    });
-  }
-
-overallIndexData = {
-    labels: ["Overall Index Score"],
-    datasets: [{
-        label: "Score", 
-        data: [],
-        backgroundColor: "#33A02C",
-        color:"#33A02C",
-      }]
+compositeData = {
+  labels: compositeLabel,
+  datasets: [{
+      label: "Selected Area", 
+      data: [],
+      backgroundColor: "#33A02C",
+      color:"#33A02C",
+    },
+    {
+      label: "City Average",
+      data: cityAverageMockIndexData
+    },
+  ]
 };
 
-overallIndexConfig = {
+compositeConfig = {
   type: 'horizontalBar',
-  data: overallIndexData,
+  data: compositeData,
   options: {
+    title: {
+      display: true,
+      text: 'Green Equity Vulnerability Index',
+    },
+    tooltips:{
+      callbacks:{
+        footer: (tooltipItems)=>{ 
+          return compositeMetaData[tooltipItems[0].label]["description"];
+        }
+      }
+    },
     responsive: true,
     maintainAspectRatio: false,
-    plugins:{
-      title:{
-        display: true, 
-        text: "Overall Index Score"
-      }
+    interaction: {
+      intersect: false,
+      mode: 'index',
     },
     scales: {
       xAxes: [
@@ -86,51 +111,85 @@ overallIndexConfig = {
 
 
 indexData = {
-    labels: indexLabels,
-    datasets: [{
-        label: "Index Score", 
-        data: [],
-        backgroundColor: "#33A02C",
-        color:"#33A02C",
-      }]
+  labels: indexLabels,
+  datasets: [{
+      label: "Selected Area", 
+      data: [],
+      backgroundColor: "#33A02C",
+      color:"#33A02C",
+    },
+    {
+      label: "City Average",
+      data: cityAverageMockIndexData
+    },
+  ]
 };
 
 indexConfig = {
-    type: 'horizontalBar',
-    data: indexData,
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins:{
-        title:{
-          display: true, 
-          text: "Index Score"
+  type: 'horizontalBar',
+  data: indexData,
+  options: {
+    tooltips:{
+      callbacks:{
+        footer: (tooltipItems)=>{ 
+          return indexMetaData[tooltipItems[0].label]["description"];
         }
-      },
-      scales: {
-        xAxes: [
-          {
-            display: true,
-            ticks: {
-              min: 0,
-              max: 1,
-            },
-          },
-        ],
-        yAxes: [
-          {
-            display: true,
-          },
-        ],
       }
     },
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins:{
+      title:{
+        display: true, 
+        text: "Index Score"
+      }
+    },
+    scales: {
+      xAxes: [
+        {
+          display: true,
+          ticks: {
+            min: 0,
+            max: 1,
+          },
+        },
+      ],
+      yAxes: [
+        {
+          display: true,
+        },
+      ],
+    }
+  },
 };
 
-const overallIndexScore = document.getElementById("overallIndex");
-overallIndexChart = new Chart(overallIndexScore,overallIndexConfig)
+// Helper functions
 
-const indexScore = document.getElementById("index");
-indexChart = new Chart(indexScore,indexConfig)
+function flyToClick(coords) {
+    deckgl.setProps({
+      initialViewState: {
+        longitude: coords[0],
+        latitude: coords[1],
+        zoom: 12,
+        transitionDuration: 500,
+        transitionInterpolator: new deck.FlyToInterpolator(),
+      },
+    });
+  }
+
+function updateChart(chart, data){
+    dataset = chart.data.datasets[0];
+    dataset.data = data;
+    chart.update();
+  }
+
+// Create charts
+
+const compositeElement = document.getElementById("composite");
+compositeIndexChart = new Chart(compositeElement,compositeConfig)
+
+const indexElement = document.getElementById("index");
+indexChart = new Chart(indexElement,indexConfig)
 
 const deckgl = new deck.DeckGL({
     container: "map",
@@ -179,14 +238,15 @@ const deckgl = new deck.DeckGL({
             highlightColor: [255, 255, 255, 200],
             onClick: (info) => {
                 flyToClick(info.coordinate);
-                overallIndexScore.style.opacity = 1;
-                indexScore.style.opacity = 1;
+
+                // Update charts 
                 properties = info.object.properties
-                overallIndexData = [properties.INDEX_] 
-                indexData = indexValues.map((value)=>properties[value])
-                updateChart(overallIndexChart,overallIndexData);
+                compositeIndexData = compositeField.map((value)=>properties[value])
+
+                indexData = indexField.map((value)=>properties[value])
+
+                updateChart(compositeIndexChart,compositeIndexData);
                 updateChart(indexChart, indexData);
-                console.log(properties)
             },
     
         }),
