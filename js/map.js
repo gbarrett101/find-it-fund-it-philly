@@ -1,3 +1,21 @@
+indexMetrics = {"Minority":"I_PCTMIN",
+"Low Income":"I_LOWINC",
+"Under Age 5":"I_UNDER5",
+"Over Age 64":"I_OVER64",
+"No High School Education":"I_NOHS",
+"Owner Occupied":"I_OWNER",
+"Traffic Amount":"I_TRAFFIC",
+"Ozone":"I_OZONE",
+"Particular matter":'I_PM25',
+"Park access":"I_PARKS",
+"Tree canopy":"I_CANOPY",
+"Playground Access":"I_PLAY",
+"Impervious Cover":"I_IMP",
+"Vacant Land":'I_VACANT'}
+
+indexLabels = Object.keys(indexMetrics)
+indexValues = Object.values(indexMetrics)
+
 const index = "./data/index.geojson";
 function map_range(value, low1, high1, low2, high2) {
   return low2 + ((high2 - low2) * (value - low1)) / (high1 - low1);
@@ -65,8 +83,10 @@ overallIndexConfig = {
   },
 };
 
+
+
 indexData = {
-    labels: ["canopy", "disadvantaged","low income", "over 64", "parks", "vacancy" ],
+    labels: indexLabels,
     datasets: [{
         label: "Index Score", 
         data: [],
@@ -161,14 +181,12 @@ const deckgl = new deck.DeckGL({
                 flyToClick(info.coordinate);
                 overallIndexScore.style.opacity = 1;
                 indexScore.style.opacity = 1;
-                panel.style.opacity = 1;
                 properties = info.object.properties
                 overallIndexData = [properties.INDEX_] 
-                indexData = [properties.I_CANOPY, properties.I_DISADVAN,
-                  properties.I_LOWINC, properties.I_OVER64, properties.I_PARKS,
-                  properties.I_VACANT]
+                indexData = indexValues.map((value)=>properties[value])
                 updateChart(overallIndexChart,overallIndexData);
                 updateChart(indexChart, indexData);
+                console.log(properties)
             },
     
         }),
