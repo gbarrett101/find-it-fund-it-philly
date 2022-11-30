@@ -6,81 +6,196 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Register - SB Admin</title>
+        <title>Find it Fund it Philly main page</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        
         <style>
-            div {text-align: center;}
+            nav {text-align: center;}
+            .modal-content{text-align: center;
+                align-items: center;}
 
             .card {background-color: #fff;}
         </style>
+
+        <!-- modal dependencies -->
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#myModal").modal('show');
+            });
+        </script>
+
+        <!-- deck.gl standalone bundle -->
+        <script src="https://unpkg.com/deck.gl@^8.8.0/dist.min.js"></script>
+   
+    
+        <!-- Mapbox dependencies -->
+        <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.js"></script>
+        <link
+            href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.css"
+            rel="stylesheet"
+        />
+        
     </head>
-    <body class="bs-primary">
+    <body class="sb-nav-fixed">
+
+        <!-- Modal HTML -->
+        <div id="myModal" class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Welcome to Find it Fund it Philly!</h5>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="row mb-1">
+                                <h5> <strong>FIND</strong> key areas in which your community may need support.</h5>
+                                <h5></h5>
+                                <h5> <strong>FUND</strong> your community organization’s projects through recommended resources.</h5> 
+                            </div>
+    
+                            <div class="row mb-1"></div>
+    
+                            <div class="card mb-1">
+                                <element id = card-body-gray>
+                                    <div class="card-body">
+                                        <p>To begin, please enter your address or select your neighboorhood and press continue:</p>
+                                    </div>
+    
+                                    <div class="row mb-6"> 
+                                        <div class="col-md-1">
+                                        </div>
+    
+                                        <div class="col-md-4">
+                                            <label for="inputAddress">Neighborhood</label>
+                                            <input class="form-control" id="inputAddress" type="email" placeholder="" />
+                                        </div>
+    
+                                        <div class="col-md-2">
+                                            <h5>Or</h5>
+                                        </div>
+    
+                                        <div class="col-md-4">
+                                            <label for="inputAddress">Address</label>
+                                            <input class="form-control" id="inputAddress" type="address" placeholder="" />
+                                        </div>
+                                    </div>
+    
+                                    <div class="row mb-1">
+                                        <br></br>
+                                    </div>
+    
+                                </element>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                            <button type="button" class="btn btn-primary btn-block" data-bs-dismiss="modal">Continue</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Navbar-->
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-5" href="index.html">Find it, Fund it, Philly</a>
+            <a class="navbar-brand ps-5" a></a>
+            <a class="navbar-brand ps-5" a></a>
+
+            <!-- Navbar About-->
+            <a class="navbar-brand ps-5" href="about.html">About</a>
+            <a class="navbar-brand ps-5" a></a>
+            <a class="navbar-brand ps-5" a></a>
+
+            <!-- Navbar Methodology-->
+            <a class="navbar-brand ps-5" href="methodology.html">Methodology</a>
+        </nav>
+
+        <!--content-->
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-7">
-                                <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Find it, Fund it, Philly</h3></div>
-                                    <div class="card-body">
-                                        <form>
-                                            <div class="row mb-1">
-                                                <h5> <strong>FIND</strong> key areas in which your community may need support.</h5>
-                                                <h5></h5>
-                                                <h5> <strong>FUND</strong> your community organization’s projects through recommended resources.</h5> 
-                                            </div>
-
-                                            <div class="row mb-1"></div>
-
-                                            <div class="card mb-1">
-                                                <element id = card-body-gray>
-                                                    <div class="card-body">
-                                                        <p>To begin, please enter your address or select your neighboorhood and press continue:</p>
-                                                    </div>
-
-                                                    <div class="row mb-6"> 
-                                                        <div class="col-md-1">
-                                                        </div>
-
-                                                        <div class="col-md-4">
-                                                            <label for="inputAddress">Neighborhood</label>
-                                                            <input class="form-control" id="inputAddress" type="email" placeholder="" />
-                                                        </div>
-        
-                                                        <div class="col-md-2">
-                                                            <h5>Or</h5>
-                                                        </div>
-        
-                                                        <div class="col-md-4">
-                                                            <label for="inputAddress">Address</label>
-                                                            <input class="form-control" id="inputAddress" type="address" placeholder="" />
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row mb-1">
-                                                        <br></br>
-                                                    </div>
-
-                                                </element>
-                                            </div>
-
-                                            
-                                            
-                                            
-                                            
-                                            <div class="mt-4 mb-0">
-                                                <div class="d-grid"><a class="btn btn-primary btn-block" href="home.html">Continue</a></div>
-                                            </div>
-                                        </form>
+                    <br><br>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Find it, Fund it, Philly</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">A Philadelphia Green Equity Tool</li>
+                        </ol>
+                                           
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h4>
+                                    <i class="fas fa-map me-1"></i>
+                                    Find it - Map Tool
+                                </h4>
+                            </div>
+                            <div id = "maptool" class="card-body" >
+                                <div id ="maptoolrow" class = "row mr-0 ml-0">
+                                    <div id="charts" class="col">
+                                        <div class ="row h-25 ">
+                                        <canvas id="composite" ></canvas>
+                                        </div>
+                                        <div class="row h-75">
+                                        <canvas id="index"></canvas>
+                                        </div>
                                     </div>
-                                <!--
-                                    <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="login.html">Have an account? Go to login</a></div>
+                                    <div id="map" class = "col mb-0">
                                     </div>
-                                -->
                                 </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h4>
+                                    <i class="fas fa-usd me-1"></i>
+                                    Fund it - Programs and Grants
+                                </h4>
+                            </div>
+                            <div class="card-body">
+                                <table id="datatablesSimple">
+                                    <thead>
+                                        <tr>
+                                            <th>Resource Type</th>
+                                            <th>Grant Program</th>
+                                            <th>Short Description</th>
+                                            <th>Link</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Resource Type</th>
+                                            <th>Grant Program</th>
+                                            <th>Short Description</th>
+                                            <th>Link</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <tr>
+                                            <td>Watershed</td>
+                                            <td> <a href="https://water.phila.gov/stormwater/incentives/grants/" target="_blank">Stormwater Grants - Philadelphia Water Department</a> </td>
+                                            <td>The Philadelphia Water Department offers incentives to property owners, project managers, 
+                                                and developers to keep and increase stormwater management on their property for lower costs.
+                                                After a project is complete, the property owner qualifies for lower stormwater charges on
+                                                 their monthly bill through the Stormwater Credits Program.</td>
+                                            <td> <a href="https://water.phila.gov/stormwater/incentives/grants/" target="_blank">https://water.phila.gov/stormwater/incentives/grants/</a> </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Tree Canopy</td>
+                                            <td> <a href="https://www.phila.gov/services/trees-parks-the-environment/tree-related-services/get-a-yard-tree/" target="_blank">Get a Yard or Street Tree</a> </td>
+                                            <td>The Philly Park and Recreation Department gives out free trees at community giveaways in Spring 
+                                                (April to May) and Fall (October to November). This is the best time for planting trees because 
+                                                the weather is mild and the tree will be less stressed by being planted in a new home.</td>
+                                            <td> <a href="https://www.phila.gov/services/trees-parks-the-environment/tree-related-services/get-a-yard-tree/" target="_blank">https://www.phila.gov/services/trees-parks-the-environment/tree-related-services/get-a-yard-tree/</a> </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -89,5 +204,19 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/chart-area-demo.js"></script>
+        <script src="assets/demo/chart-bar-demo.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script src="js/datatables-simple-demo.js"></script>
+        <!-- Map javascript -->
+        <script src="js/map.js"></script>
+        <!-- Additional scripting for map-->
+        <script>
+            // function to exit the panel on click
+            function hidePanel() {
+            document.getElementById("panel").style.opacity = 0;
+            }
+        </script>
     </body>
 </html>
