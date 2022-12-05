@@ -1,3 +1,4 @@
+mapboxgl.accessToken = "pk.eyJ1IjoiZ2JhcnJldHQxMjMiLCJhIjoiY2w5d3RzN21rMDN1cTN2cWszZGFjZnQ1byJ9.rJLdUzmU35K7oyFMdB0xuw";
 
 async function createMap() {
   const greenIndex = await fetch("./data/index.geojson")
@@ -201,7 +202,7 @@ compositeIndexChart = new Chart(compositeElement,compositeConfig)
 const indexElement = document.getElementById("index");
 indexChart = new Chart(indexElement,indexConfig)
 
-mapboxgl.accessToken = "pk.eyJ1IjoiZ2JhcnJldHQxMjMiLCJhIjoiY2w5d3RzN21rMDN1cTN2cWszZGFjZnQ1byJ9.rJLdUzmU35K7oyFMdB0xuw";
+mapboxgl.accessToken = mapboxgl.accessToken;
 const map = new mapboxgl.Map({
   container: "map",
   style:  "mapbox://styles/gbarrett123/cl9wtvsla000114qhvtwye3e1",
@@ -249,10 +250,10 @@ map.on("load", () => {
         0, //opacity
         9, //zoom level
         0.95, //opacity
-        12, //zoom level
+        15, //zoom level
         0.95, //opacity
         18, //zoom level
-        0, //opacity
+        0.5, //opacity
       ],
     },
   });
@@ -326,31 +327,65 @@ map.on("load", () => {
       hoverPopup.remove();
   });
 
+  // handling for clicking on the map
   map.on('click', 'greenIndex', (e) => {
-    // Copy coordinates array.
+    // retrieve block group from click
     const blockGroup = e.features[0].properties;
-    // console.log(blockGroup)
+    
+
+    console.log(turf.extent(greenIndex));
+    // const bounds = turf.extent(e.features[0])
+    const center = turf.center(e.features[0]);
+
+    // map.fitBounds(bounds)
+    map.flyTo({
+      center: center.geometry.coordinates
+      });
+    // map.setZoom(15)
+
+
     // Update charts 
     // properties = info.object.properties
     compositeIndexData = compositeField.map((value)=>blockGroup[value])
-    // console.log(compositeIndexData)
     indexData = indexField.map((value)=>blockGroup[value])
 
     updateChart(compositeIndexChart,compositeIndexData);
     updateChart(indexChart, indexData);
     // const description = e.features[0].properties.description;
      
-    // // Ensure that if the map is zoomed out such that multiple
-    // // copies of the feature are visible, the popup appears
-    // // over the copy being pointed to.
-    // while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-    // coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+
     });
 
 
 
 
 });
+
+// limit the search engine boundary extent to greater Boston
+const phillyBounds = turf.extent(greenIndex);
+ 
+// Initialize the geocoder aka the search engine
+// const popupGeocoder = new MapboxGeocoder({
+//   accessToken: mapboxgl.accessToken, // Set the access token
+//   mapboxgl: mapboxgl, // Set the mapbox-gl instance
+//   placeholder: "Find it popup", //placeholder text for the search bar
+//   bbox: phillyBounds, //limit search results to Philadelphia bounds
+// });
+
+const mapGeocoder = new MapboxGeocoder({
+  accessToken: mapboxgl.accessToken, // Set the access token
+  mapboxgl: mapboxgl, // Set the mapbox-gl instance
+  placeholder: "Find it map", //placeholder text for the search bar
+  bbox: phillyBounds, //limit search results to Philadelphia bounds
+});
+ 
+// Add the geocoder to the map
+// map.addControl(popupGeocoder);
+map.addControl(mapGeocoder);
+// map.removeControl(popupGeocoder)
+
+// for some reason the geocoder does not yet work having two instances
+// popupGeocoder.addTo("#addressSearch")
 
 // Code from Class Workshop
 
@@ -580,146 +615,3 @@ map.on("load", () => {
 }
 
 createMap();
-
-// Old Deckgl code that I'm temporary keeping around for reference
-// const deckgl = new deck.DeckGL({
-//     container: "map",
-//     // Set your Mapbox access token here
-//     mapboxApiAccessToken:
-//   "pk.eyJ1IjoiZ2JhcnJldHQxMjMiLCJhIjoiY2w5d3RzN21rMDN1cTN2cWszZGFjZnQ1byJ9.rJLdUzmU35K7oyFMdB0xuw",
-//     // Set your Mapbox style here
-//     mapStyle: "mapbox://styles/gbarrett123/cl9wtvsla000114qhvtwye3e1",
-//     initialViewState: {
-//       latitude: 39.9526,
-//       longitude: -75.1652,
-//       zoom: 12,
-//       bearing: 0,
-//       pitch: 0,
-//     },
-//     controller: true,
-
-//     layers: [
-//         new deck.GeoJsonLayer({
-//             id: "index",
-//             data: index,
-//             // Styles
-//             filled: true,
-//             stroke: false,
-//             // Function for fill color
-//             getFillColor: (d, index) => {
-//               // console.log(index)
-
-//               if (d.properties.OBJECTID === 1017){
-//                 return [255,0,0]
-//               }
-
-//               // console.log(index)
-//               // Colors range from full white [255,255,255] to dark green [51,160,44]
-//               const red = map_range(d.properties.INDEX_, 2, 7, 255, 51);
-//               const green = map_range(d.properties.INDEX_, 2, 7, 255, 160);
-//               const blue = map_range(d.properties.INDEX_, 2, 7, 255, 44);
-//               // logic
-//                 // if Index_ isn't null
-//                   // return a green hue based on how large the index value is
-//                 // otherwise return all 0s with full transparency
-//               return d.properties.INDEX_
-//                       ? [red, green, blue, 200]
-//                       : [0, 0, 0, 100];
-//               },
-//             getStrokeColor: [0, 0, 0, 255],
-//             getLineColor: [0, 0, 0, 255],
-//             LineWidthUnits: "meters",
-//             getLineWidth: 10,
-//             // Interactive props
-//             pickable: true,
-//             autoHighlight: true,
-//             highlightColor: [255, 255, 255, 200],
-//             onClick: (info) => {
-//                 flyToClick(info.coordinate);
-
-//                 // Update charts 
-//                 properties = info.object.properties
-//                 compositeIndexData = compositeField.map((value)=>properties[value])
-
-//                 indexData = indexField.map((value)=>properties[value])
-
-//                 updateChart(compositeIndexChart,compositeIndexData);
-//                 updateChart(indexChart, indexData);
-//             },
-    
-//         }),
-//         new deck.ScatterplotLayer({
-//           id: "search-result",
-//           data: coordinates,
-//           getPosition: (d) => {
-            
-//             console.log(d, "hello")
-//             return d
-//             // return [d[1], d[0]]
-//           },
-//           pickable: true,
-//           opacity: 0.8,
-//           stroked: true,
-//           filled: true,
-//           radiusScale: 6,
-//           radiusMinPixels: 1,
-//           radiusMaxPixels: 100,
-//           lineWidthMinPixels: 1,
-//           getRadius: (d) => 10,
-
-//         })
-//       ],
-      
-//     getTooltip: (info) => {
-
-//       if (info?.object){
-//         console.log(info.object.properties?.OBJECTID)
-//       }
-
-//       const object = info.object
-
-//     return (
-//         object &&
-//         `Index Score: ${
-//         object.properties.INDEX_
-//             ? object.properties.INDEX_.toFixed(2)
-//             : "No Data"
-//         }`
-//     );
-//     },
-
-    
-// });
-  
-// // create search box
-// const container = document.getElementById("map")
-// const form = document.createElement("div")
-// form.className="searchbox"
-
-// const searchBox = document.createElement("input")
-
-// searchBox.type = "text"
-// searchBox.placeholder = "Search"
-// searchBox.value = [39.933969532091965, -75.16402105283208]
-// searchBox.onsubmit = handleSubmission(searchBox.value)
-
-
-// function handleSubmission(e, coords) {
-
-//   // console.log(coords)
-// }
-
-// const submit = document.createElement("input")
-
-// submit.type = "submit"
-// submit.innerHTML = "test"
-
-// submit.onclick = (e)=> {
-//   handleSubmission(e, searchBox.value)
-// }
-
-
-// form.appendChild(searchBox)
-// form.appendChild(submit)
-
-// container.appendChild(form)
