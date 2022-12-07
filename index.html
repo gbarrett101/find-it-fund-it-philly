@@ -40,7 +40,8 @@
             rel="stylesheet"
         />
         <!-- mapbox geocoder plugin -->
-        <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
+        <!-- <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script> -->
+        <script src="./mapbox-gl-geocoder.min.js"></script>
         <link
         rel="stylesheet"
         href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css"
@@ -48,6 +49,10 @@
         />
         <!-- Turf js -->
         <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v2.0.2/turf.min.js'></script>
+
+        <!-- Debounce -->
+        <!-- <script src="lodash.js"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
         
     </head>
     <body class="sb-nav-fixed">
@@ -81,7 +86,7 @@
     
                                         <div class="col-md-4">
                                             <label for="inputAddress">Neighborhood</label>
-                                            <input class="form-control" id="inputAddress" type="email" placeholder="" />
+                                            <input class="form-control" id="inputNeighborhood" type="email" placeholder="" />
                                         </div>
     
                                         <div class="col-md-2">
@@ -90,8 +95,18 @@
     
                                         <div class="col-md-4" id="addressSearch">
                                             <label for="inputAddress">Address</label>
-                                            <input class="form-control" id="inputAddress" type="address" placeholder="" />
+                                            <input class="form-control" id="search" type="address" placeholder="" />
                                         </div>
+                                        <!-- <div class="col-md-4" class="search-container">
+                                            <label for="search">Search for a location: </label>
+                                            <input class="form-control" id="search" type="text">
+                                            <button id="search-clear">Clear Results</button>
+                                          </div>
+                                            
+                                          <pre class="selected-result"></pre>
+                                          
+                                          <h2 class="geocode-results-title">Suggested Search Results</h2>
+                                          <ul class="geocode-results-list"></ul> -->
                                     </div>
     
                                     <div class="row mb-1">

@@ -210,13 +210,15 @@ const map = new mapboxgl.Map({
   zoom: 12,
   pitch: 0
 });
-
+let hoveredStateId = null;
+// let hoverdOutlineId = nill;
 // once the basemap is loaded, begin to add data sources and layers
 map.on("load", () => {
 
   map.addSource("greenIndex", {
     type: "geojson",
     data: greenIndex,
+    'generateId': true, // ensure all features have unique id
   });
 
   const scaleType = {
@@ -243,18 +245,61 @@ map.on("load", () => {
       ],
       //   change opacity based on zoom level
       "fill-opacity": [
-        "interpolate",
-        ["linear"],
-        ["zoom"],
-        7, //zoom level
-        0, //opacity
-        9, //zoom level
-        0.95, //opacity
-        15, //zoom level
-        0.95, //opacity
-        18, //zoom level
-        0.5, //opacity
-      ],
+        'case',
+        ['boolean', ['feature-state', 'hover'], false],
+        1,
+        0.85
+        ],
+      // "fill-outline-color": [
+      //   'case',
+      //   ['boolean', ['feature-state', 'hover'], false],
+      //   '#000000',
+      //   '#ffffff'
+      //   ],
+      // "line-width": 2,
+      // [
+      //   "interpolate",
+      //   ["linear"],
+      //   ["zoom"],
+      //   7, //zoom level
+      //   0, //opacity
+      //   9, //zoom level
+      //   0.95, //opacity
+      //   15, //zoom level
+      //   0.95, //opacity
+      //   18, //zoom level
+      //   0.5, //opacity
+      // ],
+    },
+  });
+
+  map.addLayer({
+    // this layer is just used to highlight which block group is selected
+    id: "greenIndexOutlines",
+    type: "line",
+    source: "greenIndex", // reference the data source
+    layout: {},
+    paint: {
+      // Boolean cases to
+      'line-color': [
+        'case',
+          ['boolean', ['feature-state', 'hover'], false],
+          '#000000',
+          '#ffffff'
+        ],
+      'line-width': [
+        'case',
+          ['boolean', ['feature-state', 'hover'], false],
+          2,
+          0.5
+        ],
+      'line-opacity': [
+        'case',
+          ['boolean', ['feature-state', 'hover'], false],
+          1,
+          0
+        ],
+
     },
   });
 
@@ -305,6 +350,28 @@ map.on("load", () => {
  
   // add a popup on hover over the population geojson
   map.on("mousemove", "greenIndex", (e) => {
+    console.log(e.features[0].id)
+    if (e.features.length > 0) {
+      if (hoveredStateId !== null) {
+        map.setFeatureState(
+          { source: 'greenIndex', id: hoveredStateId },
+          { hover: false }
+        );
+      }
+      hoveredStateId = e.features[0].id;
+      map.setFeatureState(
+        { source: 'greenIndex', id: hoveredStateId },
+        { hover: true }
+        );
+
+      map.setFeatureState(
+        { source: 'greenIndexOutlines', id: hoveredStateId },
+        { hover: true }
+        );
+      };
+
+      
+
       // set the cursor to pointer
     map.getCanvas().style.cursor = "pointer";
     const { INDEX_ } = e.features[0].properties;
@@ -325,6 +392,18 @@ map.on("load", () => {
       // set the cursor to default
       map.getCanvas().style.cursor = "";
       hoverPopup.remove();
+
+      if (hoveredStateId) {
+        map.setFeatureState(
+          { source: 'greenIndex', id: hoveredStateId },
+          { hover: false }
+        );
+        map.setFeatureState(
+          { source: 'greenIndexOutlines', id: hoveredStateId },
+          { hover: false }
+        );
+        }
+        hoveredStateId = null;
   });
 
   // handling for clicking on the map
@@ -385,7 +464,10 @@ map.addControl(mapGeocoder);
 // map.removeControl(popupGeocoder)
 
 // for some reason the geocoder does not yet work having two instances
-// popupGeocoder.addTo("#addressSearch")
+// mapGeocoder.addTo("#addressSearch")
+// mapGeocoder.addTo("#charts")
+
+
 
 // Code from Class Workshop
 
