@@ -210,8 +210,8 @@ const map = new mapboxgl.Map({
   zoom: 12,
   pitch: 0
 });
-let hoveredStateId = null;
-// let hoverdOutlineId = nill;
+let hoveredId = null; // which block group is hovered
+let selectedID = null; // which block group is selected
 // once the basemap is loaded, begin to add data sources and layers
 map.on("load", () => {
 
@@ -228,7 +228,6 @@ map.on("load", () => {
 
   const scale = getMapScale(greenIndex, "INDEX_", scaleType.quantile);
   // add layer for philly data
-  // console.log(scale)
   map.addLayer({
     id: "greenIndex",
     type: "fill",
@@ -250,26 +249,6 @@ map.on("load", () => {
         1,
         0.85
         ],
-      // "fill-outline-color": [
-      //   'case',
-      //   ['boolean', ['feature-state', 'hover'], false],
-      //   '#000000',
-      //   '#ffffff'
-      //   ],
-      // "line-width": 2,
-      // [
-      //   "interpolate",
-      //   ["linear"],
-      //   ["zoom"],
-      //   7, //zoom level
-      //   0, //opacity
-      //   9, //zoom level
-      //   0.95, //opacity
-      //   15, //zoom level
-      //   0.95, //opacity
-      //   18, //zoom level
-      //   0.5, //opacity
-      // ],
     },
   });
 
@@ -350,24 +329,14 @@ map.on("load", () => {
  
   // add a popup on hover over the population geojson
   map.on("mousemove", "greenIndex", (e) => {
-    console.log(e.features[0].id)
     if (e.features.length > 0) {
-      if (hoveredStateId !== null) {
-        map.setFeatureState(
-          { source: 'greenIndex', id: hoveredStateId },
-          { hover: false }
-        );
+      if (hoveredId !== null) {
+        if (hoveredId !== selectedID) {
+          setHoverState(hoveredId, false);
+        }
       }
-      hoveredStateId = e.features[0].id;
-      map.setFeatureState(
-        { source: 'greenIndex', id: hoveredStateId },
-        { hover: true }
-        );
-
-      map.setFeatureState(
-        { source: 'greenIndexOutlines', id: hoveredStateId },
-        { hover: true }
-        );
+      hoveredId = e.features[0].id;
+      setHoverState(hoveredId, true);
       };
 
       
@@ -375,8 +344,7 @@ map.on("load", () => {
       // set the cursor to pointer
     map.getCanvas().style.cursor = "pointer";
     const { INDEX_ } = e.features[0].properties;
-    const blockGroup = e.features[0].properties;
-    // console.log(blockGroup);
+
     hoverPopup
       .setLngLat(e.lngLat)
       .setHTML(
@@ -393,24 +361,27 @@ map.on("load", () => {
       map.getCanvas().style.cursor = "";
       hoverPopup.remove();
 
-      if (hoveredStateId) {
-        map.setFeatureState(
-          { source: 'greenIndex', id: hoveredStateId },
-          { hover: false }
-        );
-        map.setFeatureState(
-          { source: 'greenIndexOutlines', id: hoveredStateId },
-          { hover: false }
-        );
+      if (hoveredId) {
+        if (hoveredId !== selectedID) {
+          // only deselect if the block group hovered is not the selected one
+          setHoverState(hoveredId, false);
         }
-        hoveredStateId = null;
+        
+        }
+        hoveredId = null;
   });
 
   // handling for clicking on the map
   map.on('click', 'greenIndex', (e) => {
     // retrieve block group from click
     const blockGroup = e.features[0].properties;
-    
+
+    if (selectedID !== null) {
+      setHoverState(selectedID, false);
+    }
+
+    selectedID = e.features[0].id;
+    setHoverState(selectedID, true);
 
     console.log(turf.extent(greenIndex));
     // const bounds = turf.extent(e.features[0])
@@ -437,6 +408,17 @@ map.on("load", () => {
 
 
 
+  function setHoverState(id, bool) {
+    map.setFeatureState(
+      { source: 'greenIndex', id: id },
+      { hover: bool }
+      );
+
+    map.setFeatureState(
+      { source: 'greenIndexOutlines', id: id },
+      { hover: bool }
+    );
+  }
 
 });
 
@@ -466,6 +448,8 @@ map.addControl(mapGeocoder);
 // for some reason the geocoder does not yet work having two instances
 // mapGeocoder.addTo("#addressSearch")
 // mapGeocoder.addTo("#charts")
+
+
 
 
 
