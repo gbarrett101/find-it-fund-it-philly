@@ -11903,4 +11903,50 @@ body {
   color: #009879;
 }
 
+/* Styling for search box */
+
+
+
+.search-container {
+  margin-bottom: 1em;
+}
+
+.geocode-results-title {
+  font-size: 1em;
+  font-family: sans-serif;
+  margin: 0;
+  visibility: hidden;
+}
+
+.geocode-results-list {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  list-style: none;
+}
+.geocode-results-list li {
+  border-bottom: 1px solid #ccc;
+}
+
+.geocode-results-list li:hover {
+  background-color: hsl(132, 90%, 70%);
+  font-weight: bold;
+}
+
+.geocode-results-list button {
+  width: 100%;
+  padding: 0.5em 0.25em;
+  text-align: left;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-weight: inherit;
+}
+
+pre {
+  display: none;
+  height: 500px;
+  max-width: 500px;
+  overflow: auto;
+}
 

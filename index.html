@@ -82,8 +82,8 @@
                                     </div>
     
                                     <div class="row mb-6"> 
-                                        <div class="col-md-1">
-                                        </div>
+                                        <!-- <div class="col-md-1">
+                                        </div> -->
     
                                         <!-- <div class="col-md-4">
                                             <label for="inputAddress">Neighborhood</label>
@@ -98,16 +98,16 @@
                                             <label for="inputAddress">Address</label>
                                             <input class="form-control" id="search" type="address" placeholder="" />
                                         </div> -->
-                                        <div class="col-md-4" class="search-container">
+                                        <div class="search-container">
                                             <label for="search">Search for a location: </label>
                                             <input class="form-control" id="search" type="text" list="results" autocomplete="off">
                                             <datalist id="results"></datalist>
                                             <button id="search-clear" class="btn btn-secondary">Clear Results</button>
-                                          </div>
+                                        </div>
                                             
-                                          <pre class="selected-result"></pre>
+                                        <pre class="selected-result"></pre>
                                           
-                                          <p class="geocode-results-title">Suggested Search Results:</p>
+                                          <p id="suggestedTitle" class="geocode-results-title">Suggested Search Results:</p>
                                           <ul class="geocode-results-list list-group"></ul>
                                     </div>
     

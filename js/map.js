@@ -516,6 +516,7 @@ async function createMap() {
 
   // clears our results from the results list element
   function clearResults() {
+    document.getElementById("suggestedTitle").style.visibility = "hidden";
     resultsList.innerHTML = "";
   }
 
@@ -533,11 +534,11 @@ async function createMap() {
       // exit the function early to prevent any other code below from running
       return;
     }
-
     // make sure we actually have the `results.features` property so we don't get an error when trying to access it
     if (toAppend && toAppend.features) {
       // first clear the list of any previous results:
       clearResults();
+      document.getElementById("suggestedTitle").style.visibility = "visible";
 
       // update the results list.
       // FYI this type of operation is much simpler to do with a templating library such as LitElement, React, Vue, etc.
