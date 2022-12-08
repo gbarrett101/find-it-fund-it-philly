@@ -11882,11 +11882,12 @@ body {
 
 .styled-table th,
 .styled-table td {
-    padding: 12px 15px;
+    padding: 30px 15px;
 }
 
 .styled-table tbody tr {
   border-bottom: 1px solid #dddddd;
+  color: var(--bs-dark);
 }
 
 .styled-table tbody tr:nth-of-type(even) {
