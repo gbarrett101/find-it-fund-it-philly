@@ -50,7 +50,7 @@
         type="text/css"
         />
         <!-- Turf js -->
-        <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v2.0.2/turf.min.js'></script>
+        <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
 
         <!-- Debounce -->
         <!-- <script src="lodash.js"></script> -->
@@ -67,7 +67,6 @@
                         <h5 class="modal-title">Welcome to Find it Fund it Philly!</h5>
                     </div>
                     <div class="modal-body">
-                        <form>
                             <div class="row mb-1">
                                 <h5> <strong>FIND</strong> key areas in which your community may need support.</h5>
                                 <h5></h5>
@@ -79,36 +78,37 @@
                             <div class="card mb-1">
                                 <element id = card-body-gray>
                                     <div class="card-body">
-                                        <p>To begin, please enter your address or select your neighboorhood and press continue:</p>
+                                        <p>To begin, please enter search for your address or press continue:</p>
                                     </div>
     
                                     <div class="row mb-6"> 
                                         <div class="col-md-1">
                                         </div>
     
-                                        <div class="col-md-4">
+                                        <!-- <div class="col-md-4">
                                             <label for="inputAddress">Neighborhood</label>
                                             <input class="form-control" id="inputNeighborhood" type="email" placeholder="" />
                                         </div>
     
                                         <div class="col-md-2">
                                             <h5>Or</h5>
-                                        </div>
+                                        </div> -->
     
-                                        <div class="col-md-4" id="addressSearch">
+                                        <!-- <div class="col-md-4" id="addressSearch">
                                             <label for="inputAddress">Address</label>
                                             <input class="form-control" id="search" type="address" placeholder="" />
-                                        </div>
-                                        <!-- <div class="col-md-4" class="search-container">
+                                        </div> -->
+                                        <div class="col-md-4" class="search-container">
                                             <label for="search">Search for a location: </label>
-                                            <input class="form-control" id="search" type="text">
-                                            <button id="search-clear">Clear Results</button>
+                                            <input class="form-control" id="search" type="text" list="results" autocomplete="off">
+                                            <datalist id="results"></datalist>
+                                            <button id="search-clear" class="btn btn-secondary">Clear Results</button>
                                           </div>
                                             
                                           <pre class="selected-result"></pre>
                                           
-                                          <h2 class="geocode-results-title">Suggested Search Results</h2>
-                                          <ul class="geocode-results-list"></ul> -->
+                                          <p class="geocode-results-title">Suggested Search Results:</p>
+                                          <ul class="geocode-results-list list-group"></ul>
                                     </div>
     
                                     <div class="row mb-1">
@@ -117,7 +117,6 @@
     
                                 </element>
                             </div>
-                        </form>
                     </div>
                     <div class="modal-footer">
                             <button type="button" class="btn btn-primary btn-block" data-bs-dismiss="modal">Continue</button>
