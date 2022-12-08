@@ -187,23 +187,15 @@
                                 </h4>
                             </div>
                             <div class="card-body">
-                                <table id="datatablesSimple">
+                                <table class="styled-table" id="mytable">
                                     <thead>
                                         <tr>
-                                            <th>Resource Type</th>
-                                            <th>Grant Program</th>
-                                            <th>Short Description</th>
-                                            <th>Link</th>
+                                            <th onclick="sortTable(0)">Resource Type</th>
+                                            <th onclick="sortTable(1)">Grant Program</th>
+                                            <th onclick="sortTable(2)">Short Description</th>
+                                            <th onclick="sortTable(3)">Link</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Resource Type</th>
-                                            <th>Grant Program</th>
-                                            <th>Short Description</th>
-                                            <th>Link</th>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
                                         <tr>
                                             <td>Watershed</td>
@@ -324,11 +316,7 @@
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
         
-        <script>
-            $(document).ready(function(){
-                $("#tourstep1").modal('show');
-            });
-        </script>
+        
        
         
 
@@ -340,6 +328,72 @@
             function hidePanel() {
             document.getElementById("panel").style.opacity = 0;
             }
+        </script>
+
+        <!-- table sorting javascript -->
+        <script>
+            function sortTable(n) {
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            table = document.getElementById("mytable");
+            switching = true;
+            // Set the sorting direction to ascending:
+            dir = "desc";
+            /* Make a loop that will continue until
+            no switching has been done: */
+            while (switching) {
+                // Start by saying: no switching is done:
+                switching = false;
+                rows = table.rows;
+                /* Loop through all table rows (except the
+                first, which contains table headers): */
+                for (i = 1; i < (rows.length - 1); i++) {
+                // Start by saying there should be no switching:
+                shouldSwitch = false;
+                /* Get the two elements you want to compare,
+                one from current row and one from the next: */
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+                /* Check if the two rows should switch place,
+                based on the direction, asc or desc: */
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    // If so, mark as a switch and break the loop:
+                    shouldSwitch = true;
+                    break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                    // If so, mark as a switch and break the loop:
+                    shouldSwitch = true;
+                    break;
+                    }
+                }
+                }
+                if (shouldSwitch) {
+                /* If a switch has been marked, make the switch
+                and mark that a switch has been done: */
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                // Each time a switch is done, increase this count by 1:
+                switchcount ++;
+                } else {
+                /* If no switching has been done AND the direction is "asc",
+                set the direction to "desc" and run the while loop again. */
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+                }
+            }
+            }
+
+            sortTable(0)
+        </script>
+
+        <script>
+            $(document).ready(function(){
+                $("#tourstep1").modal('show');
+            });
         </script>
 
         
