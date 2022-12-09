@@ -50,6 +50,11 @@
                 border-collapse: separate;
                 overflow: hidden;                
             }
+
+            #padded-row{
+                padding-left: 50px;
+                padding-right: 50px;
+            }
         </style>
 
         <!-- modal dependencies -->
@@ -98,50 +103,51 @@
                                 <h5></h5>
                                 <h5> <strong>FUND</strong> your community organization’s projects through recommended resources.</h5> 
                             </div>
+
     
-                            <div class="row mb-1"></div>
-    
-                            <div class="card mb-1">
-                                <element id = card-body-gray>
-                                    <div class="card-body">
-                                        <p>To begin, please enter search for your address or press continue:</p>
-                                    </div>
-    
-                                    <div class="row mb-6"> 
-                                        <!-- <div class="col-md-1">
-                                        </div> -->
-    
-                                        <!-- <div class="col-md-4">
-                                            <label for="inputAddress">Neighborhood</label>
-                                            <input class="form-control" id="inputNeighborhood" type="email" placeholder="" />
+                            <div class="container" id="padded-row">
+                                <div class="card mb-4">
+                                    <element id = card-body-gray>
+                                        <div class="card-body">
+                                            <p>To begin, please enter search for your address or press continue:</p>
                                         </div>
-    
-                                        <div class="col-md-2">
-                                            <h5>Or</h5>
-                                        </div> -->
-    
-                                        <!-- <div class="col-md-4" id="addressSearch">
-                                            <label for="inputAddress">Address</label>
-                                            <input class="form-control" id="search" type="address" placeholder="" />
-                                        </div> -->
-                                        <div class="search-container">
-                                            <label for="search">Search for a location: </label>
-                                            <input class="form-control" id="search" type="text" list="results" autocomplete="off">
-                                            <datalist id="results"></datalist>
-                                            <button id="search-clear" class="btn btn-secondary" style="margin-top:10px;">Clear Results</button>
-                                        </div>
+        
+                                        <div class="row mb-6"> 
+                                            <!-- <div class="col-md-1">
+                                            </div> -->
+        
+                                            <!-- <div class="col-md-4">
+                                                <label for="inputAddress">Neighborhood</label>
+                                                <input class="form-control" id="inputNeighborhood" type="email" placeholder="" />
+                                            </div>
+        
+                                            <div class="col-md-2">
+                                                <h5>Or</h5>
+                                            </div> -->
+        
+                                            <!-- <div class="col-md-4" id="addressSearch">
+                                                <label for="inputAddress">Address</label>
+                                                <input class="form-control" id="search" type="address" placeholder="" />
+                                            </div> -->
+                                            <div class="search-container">
+                                                <label for="search">Search for a location: </label>
+                                                <input class="form-control" id="search" type="text" list="results" autocomplete="off">
+                                                <datalist id="results"></datalist>
+                                                <button id="search-clear" class="btn btn-secondary" style="margin-top:10px;">Clear Results</button>
+                                            </div>
+                                                
+                                            <pre class="selected-result"></pre>
                                             
-                                        <pre class="selected-result"></pre>
-                                          
-                                          <p id="suggestedTitle" class="geocode-results-title">Suggested Search Results:</p>
-                                          <ul class="geocode-results-list list-group"></ul>
-                                    </div>
-    
-                                    <div class="row mb-1">
-                                        <br></br>
-                                    </div>
-    
-                                </element>
+                                            <p id="suggestedTitle" class="geocode-results-title">Suggested Search Results:</p>
+                                            <ul class="geocode-results-list list-group"></ul>
+                                        </div>
+        
+                                        <div class="row mb-1">
+                                            <br></br>
+                                        </div>
+        
+                                    </element>
+                                </div>
                             </div>
                     </div>
                     <div class="modal-footer">
