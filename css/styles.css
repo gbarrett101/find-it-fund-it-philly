@@ -11909,6 +11909,8 @@ body {
 
 .search-container {
   margin-bottom: 1em;
+  padding-right: 100px;
+  padding-left: 100px;
 }
 
 .geocode-results-title {
@@ -11949,4 +11951,5 @@ pre {
   max-width: 500px;
   overflow: auto;
 }
+
 
