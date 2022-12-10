@@ -90,31 +90,81 @@
     </head>
     <body class="sb-nav-fixed">
 
-        <!-- Modal HTML -->
+        <!-- Modal 1 HTML -->
         <div class="modal fade" id = "tourstep1" tabindex="-1">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content" id="modal-rounded">
                     <div class="modal-header">
-                        <h5 class="modal-title">Welcome to Find it Fund it Philly!</h5>
+                        <h4 class="modal-title"><strong>Welcome to Find it, Fund it, Philly!</strong></h4>
                     </div>
                     <div class="modal-body">
+                        <div class="row mb-1">
+                            <h5> <strong>FIND</strong> key areas in which your community may need support.</h5>
+                            <h5></h5>
+                            <h5> <strong>FUND</strong> your community organization’s projects through recommended resources.</h5> 
+                        </div>
+                        <br><br>
+                        <div class="row mb-1">
+                            <h5> There are 2 tools on this site to help you get funding for your community. </h5>
+                               <h5> Click "Start Introduction" for a brief explanation of the tools, or "Close" to jump right in!</h5>                        
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                            <button class="btn btn-primary" data-bs-target="#tourstep2" data-bs-toggle="modal" data-bs-dismiss="modal">Start Introduction</button>
+                            <button type="button" class="btn btn-primary btn-block" data-bs-dismiss="modal">Close</button>
+                            <!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal 2 HTML -->
+        <div class="modal fade" id = "tourstep2" tabindex="-1">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content" id="modal-rounded">
+                    <div class="modal-body">
+                        <br><br>
                             <div class="row mb-1">
-                                <h5> There are 2 tools on this site to help you find funding for your community.</h5>
+                                
+                                 <img src="assets/img/map_tool_ex.png" alt="map tool example"> 
                                 <h5>
                                      Our <strong>Map Tool</strong> lets you find data on your neighborhood's Green Infrastrucure
                                      and compare it to the city average. We give each neighborhood an overall Green Infrastructure score, 
                                      and break it down into 12 categories. In each category, a high score means that
                                      a neighborhood is more vulnerable in that category. 
+                                     <br><br>
+                                     Use this tool to determine what your neighborhood needs support for, and as part 
+                                     of your grant application to demontrate why you need funding.
                                 </h5>
-                                <h5></h5>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                            <button class="btn btn-primary" data-bs-target="#tourstep3" data-bs-toggle="modal" data-bs-dismiss="modal">Next</button>
+                            <button type="button" class="btn btn-primary btn-block" data-bs-dismiss="modal">Close Intro</button>
+                            <!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal 3 HTML -->
+        <div class="modal fade" id = "tourstep3" tabindex="-1">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content" id="modal-rounded">
+                    <div class="modal-body">
+                            <div class="row mb-1">
+                                <img src="assets/img/grant_tool_ex.png" alt="map tool example"> 
+
                                 <h5>
                                     Our <strong>Grant Tool</strong> provides information and links to different grants available, 
-                                    organizing them by category. 
+                                    organizing them by category.
+                                    <br> <br>
+                                    Use this tool to find grants to apply for.
                                </h5>
                             </div>
                     </div>
                     <div class="modal-footer">
-                            <button class="btn btn-primary" data-bs-target="#tourstep2" data-bs-toggle="modal" data-bs-dismiss="modal">Next</button>
+                            <button class="btn btn-primary" data-bs-target="#tourstep4" data-bs-toggle="modal" data-bs-dismiss="modal">Next</button>
                             <button type="button" class="btn btn-primary btn-block" data-bs-dismiss="modal">Close Intro</button>
                             <!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
                     </div>
@@ -123,64 +173,58 @@
         </div>
         
         <!-- Modal final / search HTML -->
-        <div class="modal fade" id = "tourstep2" tabindex="-1">
+        <div class="modal fade" id = "tourstep4" tabindex="-1">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content" id="modal-rounded">
                     <div class="modal-header">
-                        <h5 class="modal-title">Welcome to Find it Fund it Philly!</h5>
+                        <h4 class="modal-title"><strong>Get Started!</strong></h4>
                     </div>
-                    <div class="modal-body">
-                            <div class="row mb-1">
-                                <h5> <strong>FIND</strong> key areas in which your community may need support.</h5>
-                                <h5></h5>
-                                <h5> <strong>FUND</strong> your community organization’s projects through recommended resources.</h5> 
-                            </div>
-
+                    <div class="modal-body">                           
+                        <div class="container" id="padded-row">
+                            <div class="card mb-4">
+                                <element id = card-body-gray>
+                                    <div class="card-body">
+                                        
+                                        <p>To begin, please search for your address or press continue:</p>
+                                    </div>
     
-                            <div class="container" id="padded-row">
-                                <div class="card mb-4">
-                                    <element id = card-body-gray>
-                                        <div class="card-body">
-                                            <p>To begin, please search for your address or press continue:</p>
+                                    <div class="row mb-6"> 
+                                        <!-- <div class="col-md-1">
+                                        </div> -->
+    
+                                        <!-- <div class="col-md-4">
+                                            <label for="inputAddress">Neighborhood</label>
+                                            <input class="form-control" id="inputNeighborhood" type="email" placeholder="" />
                                         </div>
-        
-                                        <div class="row mb-6"> 
-                                            <!-- <div class="col-md-1">
-                                            </div> -->
-        
-                                            <!-- <div class="col-md-4">
-                                                <label for="inputAddress">Neighborhood</label>
-                                                <input class="form-control" id="inputNeighborhood" type="email" placeholder="" />
-                                            </div>
-        
-                                            <div class="col-md-2">
-                                                <h5>Or</h5>
-                                            </div> -->
-        
-                                            <!-- <div class="col-md-4" id="addressSearch">
-                                                <label for="inputAddress">Address</label>
-                                                <input class="form-control" id="search" type="address" placeholder="" />
-                                            </div> -->
-                                            <div class="search-container">
-                                                <label for="search">Search for a location (in Philly city boundaries only): </label>
-                                                <input class="form-control" id="search" type="text" list="results" autocomplete="off">
-                                                <datalist id="results"></datalist>
-                                                <button id="search-clear" class="btn btn-secondary" style="margin-top:10px;">Clear Results</button>
-                                            </div>
-                                                
-                                            <pre class="selected-result"></pre>
+    
+                                        <div class="col-md-2">
+                                            <h5>Or</h5>
+                                        </div> -->
+    
+                                        <!-- <div class="col-md-4" id="addressSearch">
+                                            <label for="inputAddress">Address</label>
+                                            <input class="form-control" id="search" type="address" placeholder="" />
+                                        </div> -->
+                                        <div class="search-container">
+                                            <label for="search">Search for a location (in Philly city boundaries only): </label>
+                                            <input class="form-control" id="search" type="text" list="results" autocomplete="off">
+                                            <datalist id="results"></datalist>
+                                            <button id="search-clear" class="btn btn-secondary" style="margin-top:10px;">Clear Results</button>
+                                        </div>
                                             
-                                            <p id="suggestedTitle" class="geocode-results-title">Suggested Search Results:</p>
-                                            <ul class="geocode-results-list list-group"></ul>
-                                        </div>
-        
-                                        <div class="row mb-1">
-                                            <br></br>
-                                        </div>
-        
-                                    </element>
-                                </div>
+                                        <pre class="selected-result"></pre>
+                                        
+                                        <p id="suggestedTitle" class="geocode-results-title">Suggested Search Results:</p>
+                                        <ul class="geocode-results-list list-group"></ul>
+                                    </div>
+    
+                                    <div class="row mb-1">
+                                        <br></br>
+                                    </div>
+    
+                                </element>
                             </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary btn-block" data-bs-dismiss="modal">Continue</button>
