@@ -578,7 +578,7 @@ async function createMap() {
 
   // displays the data of the selected search result
   function handleSearchResultClick(result) {
-    $("#tourstep1").modal('hide');
+    $("#tourstep4").modal('hide');
     findBlockGroup(result.center);
   }
 
