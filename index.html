@@ -89,9 +89,41 @@
         
     </head>
     <body class="sb-nav-fixed">
-        
+
         <!-- Modal HTML -->
         <div class="modal fade" id = "tourstep1" tabindex="-1">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content" id="modal-rounded">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Welcome to Find it Fund it Philly!</h5>
+                    </div>
+                    <div class="modal-body">
+                            <div class="row mb-1">
+                                <h5> There are 2 tools on this site to help you find funding for your community.</h5>
+                                <h5>
+                                     Our <strong>Map Tool</strong> lets you find data on your neighborhood's Green Infrastrucure
+                                     and compare it to the city average. We give each neighborhood an overall Green Infrastructure score, 
+                                     and break it down into 12 categories. In each category, a high score means that
+                                     a neighborhood is more vulnerable in that category. 
+                                </h5>
+                                <h5></h5>
+                                <h5>
+                                    Our <strong>Grant Tool</strong> provides information and links to different grants available, 
+                                    organizing them by category. 
+                               </h5>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                            <button class="btn btn-primary" data-bs-target="#tourstep2" data-bs-toggle="modal" data-bs-dismiss="modal">Next</button>
+                            <button type="button" class="btn btn-primary btn-block" data-bs-dismiss="modal">Close Intro</button>
+                            <!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal final / search HTML -->
+        <div class="modal fade" id = "tourstep2" tabindex="-1">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content" id="modal-rounded">
                     <div class="modal-header">
@@ -109,7 +141,7 @@
                                 <div class="card mb-4">
                                     <element id = card-body-gray>
                                         <div class="card-body">
-                                            <p>To begin, please enter search for your address or press continue:</p>
+                                            <p>To begin, please search for your address or press continue:</p>
                                         </div>
         
                                         <div class="row mb-6"> 
@@ -130,7 +162,7 @@
                                                 <input class="form-control" id="search" type="address" placeholder="" />
                                             </div> -->
                                             <div class="search-container">
-                                                <label for="search">Search for a location: </label>
+                                                <label for="search">Search for a location (in Philly city boundaries only): </label>
                                                 <input class="form-control" id="search" type="text" list="results" autocomplete="off">
                                                 <datalist id="results"></datalist>
                                                 <button id="search-clear" class="btn btn-secondary" style="margin-top:10px;">Clear Results</button>
@@ -151,12 +183,12 @@
                             </div>
                     </div>
                     <div class="modal-footer">
-                            <button type="button" class="btn btn-primary btn-block" data-bs-dismiss="modal">Continue</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary btn-block" data-bs-dismiss="modal">Continue</button>
+                            <!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
                     </div>
                 </div>
             </div>
-        </div>
+        </div>        
 
         <!--Navbar-->
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
