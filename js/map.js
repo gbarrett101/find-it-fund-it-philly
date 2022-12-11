@@ -602,7 +602,7 @@ async function createMap() {
   const mapGeocoder = new MapboxGeocoder({
     accessToken: mapboxgl.accessToken, // Set the access token
     mapboxgl: mapboxgl, // Set the mapbox-gl instance
-    placeholder: "Find it map", //placeholder text for the search bar
+    placeholder: "Find it", //placeholder text for the search bar
     bbox: phillyBounds, //limit search results to Philadelphia bounds
   });
 
