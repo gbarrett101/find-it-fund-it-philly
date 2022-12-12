@@ -71,10 +71,8 @@ async function createMap() {
     },
   };
 
-  cityAverageMockIndexData = Object.values(indexMetaData).map(() => 0.5);
-  cityAverageMockCompositeData = Object.values(compositeMetaData).map(
-    () => 0.5
-  );
+  cityAverageMockIndexData = [0.605741765381737, 0.4383816097305395, 0.19715549270958108, 0.09904359136227546, 0.2627048956437129, 0.3678046725325746, 0.055048894872829414, 0.22864192754491, 0.4406987864520964, 0.10564570209580885, 0.5445758938984052, 0.6466251301625664, 0.5944062922218635, 0.09652809639895206]
+  cityAverageMockCompositeData = [4.674446878742523]
 
   indexField = Object.values(indexMetaData).map((metric) => metric["field"]);
   indexLabels = Object.keys(indexMetaData);
@@ -108,7 +106,7 @@ async function createMap() {
       },
       {
         label: "City Average",
-        data: cityAverageMockIndexData,
+        data: cityAverageMockCompositeData,
       },
     ],
   };
