@@ -10,48 +10,48 @@ async function createMap() {
   compositeMetaData = {
     "Index Composite Score": {
       field: "INDEX_",
-      description: "composite metric description",
+      description: "Overall vulnerability score based on index",
     },
   };
 
   indexMetaData = {
     " Minority": {
       field: "I_PCTMIN",
-      description: "Index score for percent minority",
+      description: "Based on % minority population",
     },
     "Low Income": {
       field: "I_LOWINC",
-      description: "Index score for percent low income",
+      description: "Based on % population low income",
     },
     "Under Age 5": {
       field: "I_UNDER5",
-      description: "Index score for percent under age 5",
+      description: "Based on % population under the age of 5",
     },
     "Over Age 64": {
       field: "I_OVER64",
-      description: "Index score for percent over age 64",
+      description: "Based on % population over the age of 64",
     },
     "No High School Education": {
       field: "I_NOHS",
       description:
-        "Index score for percent of adults without a high school education",
+        "Based on % of adults without a high school education",
     },
     "Owner Occupied": {
       field: "I_OWNER",
-      description: "Index score for percent owner occupied",
+      description: "Based on % owner occupied",
     },
     "Traffic Amount": {
       field: "I_TRAFFIC",
-      description: "Index score for traffic amount",
+      description: "Traffic proximity and volume",
     },
-    Ozone: { field: "I_OZONE", description: "Index score for ozone" },
+    "Ozone": { field: "I_OZONE", description: "Ozone (level in air)" },
     "Particular matter": {
       field: "I_PM25",
-      description: "Index score for particular matter 2.5",
+      description: "Particulate matter (PM2.5) levels in air, micrograms \nper cubic meter (µg/m3) annual average",
     },
     "Park Access": {
       field: "I_PARKS",
-      description: "Index score for park access",
+      description: "Based on percent of block group within ½ mile walking \ndistance to a park",
     },
     "Tree Canopy": {
       field: "I_CANOPY",
@@ -59,7 +59,7 @@ async function createMap() {
     },
     "Playground Access": {
       field: "I_PLAY",
-      description: "Index score for playground access",
+      description: "Based on kernel density of playgrounds within ½ mile \n(averaged over block group)",
     },
     "Impervious Cover": {
       field: "I_IMP",
@@ -67,7 +67,7 @@ async function createMap() {
     },
     "Vacant Land": {
       field: "I_VACANT",
-      description: "Index score for vacant land",
+      description: "kernel density of vacant lots within ½ mile \n(averaged over block group)",
     },
   };
 
