@@ -299,19 +299,19 @@ async function createMap() {
           "case",
           ["boolean", ["feature-state", "hover"], false],
           "#000000",
-          "#ffffff",
+          "#000000",
         ],
         "line-width": [
           "case",
           ["boolean", ["feature-state", "hover"], false],
           2,
-          0.5,
+          0.25,
         ],
         "line-opacity": [
           "case",
           ["boolean", ["feature-state", "hover"], false],
           1,
-          0,
+          1,
         ],
       },
     });
@@ -635,15 +635,11 @@ async function createMap() {
   // styles for our choropleth map
   let colorRamp = {
     red: [
-      "#f7f4f9",
-      "#e7e1ef",
-      "#d4b9da",
-      "#c994c7",
-      "#df65b0",
-      "#e7298a",
-      "#ce1256",
-      "#980043",
-      "#67001f",
+      "#808080", // grey for no data
+      "#fef0d9",
+      "#fdcc8a",
+      "#fc8d59",
+      "#e34a33",
     ],
     blue: [
       "#ffffd9",
@@ -655,6 +651,13 @@ async function createMap() {
       "#225ea8",
       "#253494",
       "#081d58",
+    ],
+    purple: [
+      "#808080",
+      "#f7fcfd",
+      "#c5d9ed",
+      "#9ebcda",
+      "#8c6bb1",
     ],
     greyScale: [
       "#3F3F43",
@@ -675,21 +678,25 @@ async function createMap() {
       "#66c2a4",
       "#238b45",
     ],
-    qualitative: [
-      "#e41a1c",
-      "#377eb8",
-      "#4daf4a",
-      "#984ea3",
-      "#ff7f00",
-      "#ffff33",
-      "#a65628",
-      "#f781bf",
-      "#999999",
+    greenInverse: [
+      "#808080", // grey for no data
+      "#238b45",
+      "#66c2a4",
+      "#b2e2e2",
+      "#edf8fb",
+    ],
+
+    brownYellow: [
+      "#808080",
+      "#ffffd4",
+      "#fed98e",
+      "#fe9929",
+      "#cc4c02",
     ],
   };
 
   // select the color ramp to be used
-  const selectedColorRamp = colorRamp.green;
+  const selectedColorRamp = colorRamp.brownYellow;
 
   function getMapScale(jsonSource, prop, scaleType) {
     if (scaleType === "equalInterval") {
